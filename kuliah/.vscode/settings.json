@@ -1,0 +1,13 @@
+{
+  "workbench.colorTheme": "Panda Syntax",
+  "editor.fontFamily": "'Cascadia code', 'Courier New', monospace",
+  "editor.fontLigatures": true,
+  "editor.smoothScrolling": true,
+  "editor.cursorBlinking": "expand",
+  "window.zoomLevel": -0.2,
+  "editor.fontSize": 14,
+  "editor.bracketPairColorization.enabled": true,
+  "files.defaultLanguage": "${activeEditorLanguage}",
+  "livePreview.defaultPreviewPath": "/HTML/index.html",
+  "liveServer.settings.port": 5501
+}

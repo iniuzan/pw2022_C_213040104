@@ -1,8 +1,9 @@
 <?php
 // Cek apakah data ada di $_GET
 if (!isset($_GET["nama"])||
-    !isset($_GET["nrp"])||
+    !isset($_GET["npm"])||
     !isset($_GET["email"])||
+    !isset($_GET["gambar"])||
     !isset($_GET["jurusan"])
     ){
     //redirect
@@ -25,12 +26,12 @@ if (!isset($_GET["nama"])||
     <h1>Detail Mahasiswa</h1>
     <ul>
         <li>
-            <img src="./img/<?= $_GET["gambar"]?>" alt="" width="200px">
+            <img src="./img/<?=$_GET["gambar"]?>" alt="" width="200px">
         </li>
-        <li><?= $_GET ["nama"] ?></li>
-        <li><?= $_GET ["npm"] ?></li>
-        <li><?= $_GET ["email"] ?></li>
-        <li><?= $_GET ["jurusan"] ?></li>
+        <li><?=$_GET["nama"] ?></li>
+        <li><?=$_GET["npm"] ?></li>
+        <li><?=$_GET["email"] ?></li>
+        <li><?=$_GET["jurusan"] ?></li>
         <li><a href="latihan1.php">kembali</a></li>
 
     </ul>

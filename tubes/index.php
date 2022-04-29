@@ -16,6 +16,8 @@ $film = query("SELECT * FROM film");
 
 <body>
     <h1>Daftar Film</h1>
+    <a href="tambah.php">Tambah Data Film</a>
+    <br><br>
     <table border="1" cellpadding="10" cellspacing="0">
         <tr>
             <th>No</th>
@@ -41,9 +43,9 @@ $film = query("SELECT * FROM film");
             <td><?= $row['sutradara'] ?></td>
             <td><?= $row['penerbit'] ?></td>
             <td>
-                <a href="#">Ubah</a> |
-                <a href="#">Hapus</a> |
-                <a href="#">Detail</a>
+                <a href="ubah.php">Ubah</a> |
+                <a href="hapus.php?id=<?= $row["id"]; ?>" onclick="return confirm('yakin?');">Hapus</a> |
+                <a href="detail.php">Detail</a>
             </td>
         </tr>
         <?php $i++ ;?>

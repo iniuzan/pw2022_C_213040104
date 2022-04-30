@@ -54,5 +54,32 @@ function hapus($id){
     
 }
 
+function ubah($data){
+    global $conn;
+
+    $id = $data['id'];
+    $judul_film = htmlspecialchars($data['judul_film']) ;
+    $thumbnail = htmlspecialchars($data['thumbnail']);
+    $genre = htmlspecialchars($data['genre']);
+    $tahun_rilis = htmlspecialchars($data['tahun_rilis']);
+    $sutradara = htmlspecialchars($data['sutradara']);
+    $penerbit = htmlspecialchars($data['penerbit']);
+    
+    
+    // query Update data
+
+    $query = "UPDATE film SET 
+                judul_film = '$judul_film',
+                thumbnail = '$thumbnail',
+                genre = '$genre',
+                tahun_rilis = '$tahun_rilis',
+                sutradara = '$sutradara',
+                penerbit = '$penerbit'
+            WHERE id = $id;
+                ";
+
+    mysqli_query($conn,$query);
+    return mysqli_affected_rows($conn);
+}
 
 ?>

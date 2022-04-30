@@ -36,14 +36,14 @@ $film = query("SELECT * FROM film");
         <tr>
             <td><?= $i ?></td>
             <td><?= $row['judul_film'] ?></td>
-            <td><img src="./img/<?= $row['thumbnail'] ?>" width="140px" alt="">
+            <td><img src="./assets/img/<?= $row['thumbnail'] ?>" width="140px" alt="">
             </td>
             <td><?= $row['genre'] ?></td>
             <td><?= $row['tahun_rilis'] ?></td>
             <td><?= $row['sutradara'] ?></td>
             <td><?= $row['penerbit'] ?></td>
             <td>
-                <a href="ubah.php">Ubah</a> |
+                <a href="ubah.php?id=<?=$row['id'];?>">Ubah</a> |
                 <a href="hapus.php?id=<?= $row["id"]; ?>" onclick="return confirm('yakin?');">Hapus</a> |
                 <a href="detail.php">Detail</a>
             </td>

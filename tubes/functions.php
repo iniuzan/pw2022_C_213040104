@@ -82,4 +82,16 @@ function ubah($data){
     return mysqli_affected_rows($conn);
 }
 
+function cari($keyword){
+    $query = "SELECT * FROM film
+        WHERE
+        judul_film LIKE '%$keyword%' OR
+        genre LIKE '%$keyword%' OR
+        tahun_rilis LIKE '%$keyword%' OR
+        sutradara LIKE '%$keyword%' OR
+        penerbit LIKE '%$keyword%'
+    ";
+    return query($query);
+}
+
 ?>

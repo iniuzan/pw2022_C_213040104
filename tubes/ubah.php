@@ -47,31 +47,33 @@ if ( isset($_POST['submit']) ){
 <body>
     <h1>Ubah Data Film</h1>
 
-    <form action="" method="POST">
+    <form action="" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="id" value="<?=$f['id']?>">
+        <input type="hidden" name="thumbnailLama" value="<?=$f['thumbnail']?>">
         <ul>
             <li>
                 <label for="judul_film">Judul Film</label>
                 <input type="text" name="judul_film" id="judul_film" required value="<?= $f["judul_film"] ?>">
             </li>
             <li>
-                <label for="thumbnail">thumbnail</label>
-                <input type="text" name="thumbnail" id="thumbnail" required value="<?= $f["thumbnail"] ?>">
+                <label for="thumbnail">Thumbnail</label> <br>
+                <img src="assets/img/<?=$f['thumbnail']?>" width="40px"> <br>
+                <input type="file" name="thumbnail" id="thumbnail">
             </li>
             <li>
-                <label for="genre">genre</label>
+                <label for="genre">Genre</label>
                 <input type="text" name="genre" id="genre" required value="<?= $f["genre"] ?>">
             </li>
             <li>
-                <label for="tahun_rilis">tahun rilis</label>
+                <label for="tahun_rilis">Tahun Rilis</label>
                 <input type="text" name="tahun_rilis" id="tahun_rilis" required value="<?= $f["tahun_rilis"] ?>">
             </li>
             <li>
-                <label for="sutradara">sutradara</label>
+                <label for="sutradara">Sutradara</label>
                 <input type="text" name="sutradara" id="sutradara" required value="<?= $f["sutradara"] ?>">
             </li>
             <li>
-                <label for="penerbit">penerbit</label>
+                <label for="penerbit">Penerbit</label>
                 <input type="text" name="penerbit" id="penerbit" required value="<?= $f["penerbit"] ?>">
             </li>
             <li>

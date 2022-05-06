@@ -27,13 +27,17 @@ function query ($query){
 function tambah($data){
     global $conn;
 
-    $judul_film = htmlspecialchars($data['judul_film']) ;
-    $thumbnail = htmlspecialchars($data['thumbnail']);
+    $judul_film = htmlspecialchars($data['judul_film']);
     $genre = htmlspecialchars($data['genre']);
     $tahun_rilis = htmlspecialchars($data['tahun_rilis']);
     $sutradara = htmlspecialchars($data['sutradara']);
     $penerbit = htmlspecialchars($data['penerbit']);
 
+    //upload gambar
+    $thumbnail = upload();
+    if ( !$thumbnail ){
+        return false;
+    }
     //query insert data
 
     $query = "INSERT INTO film
@@ -43,6 +47,58 @@ function tambah($data){
     mysqli_query($conn,$query);
 
     return mysqli_affected_rows($conn);
+}
+
+function upload(){
+    $namaFile = $_FILES['thumbnail']['name'];
+    $ukuranFile = $_FILES['thumbnail']['size'];
+    $error = $_FILES['thumbnail']['error'];
+    $tmpName = $_FILES['thumbnail']['tmp_name'];
+
+
+    //cek apakah tidak ada gambar yang diupload
+    if ($error ===4 ){
+        echo "
+        <script>
+        alert('TIDAK ADA GAMBAR YANG DIUPLOAD!');
+        </script>
+        ";
+        return false;
+    }
+
+    //cek apa yang diupload (Verifikasi)
+    $validPicExt = ['jpg','jpeg','png'];
+    $picExt = explode('.',$namaFile);
+    $picExt = strtolower(end($picExt));
+
+    if (!in_array($picExt,$validPicExt)){
+        echo "
+        <script>
+        alert('YANG ANDA UPLOAD BUKAN GAMBAR!');
+        </script>
+        ";
+    }
+
+    //cek ukuran gambar
+    if ($ukuranFile > 10000000 ){
+        echo "
+        <script>
+        alert('UKURAN GAMBAR TERLALU BESAR!');
+        </script>
+        ";
+        return false;
+    }
+
+    //lolos pengecekan, gambar ready to upload
+    //generate nama file baru
+    $namaFileBaru = uniqid();
+    $namaFileBaru.= '.';
+    $namaFileBaru.= $picExt;
+    // var_dump($namaFileBaru);
+
+
+    move_uploaded_file($tmpName,'assets/img/'.$namaFileBaru);
+    return $namaFileBaru;
 }
 
 function hapus($id){
@@ -59,7 +115,15 @@ function ubah($data){
 
     $id = $data['id'];
     $judul_film = htmlspecialchars($data['judul_film']) ;
-    $thumbnail = htmlspecialchars($data['thumbnail']);
+    $thumbnailLama = htmlspecialchars($data['thumbnailLama']);
+
+    //cek apakah user pilih gambar baru atau tidak
+    if ($_FILES['thumbnail']['error'] ===4){
+        $thumbnail = $thumbnailLama;
+    } else{
+        $thumbnail = upload();
+    }
+    
     $genre = htmlspecialchars($data['genre']);
     $tahun_rilis = htmlspecialchars($data['tahun_rilis']);
     $sutradara = htmlspecialchars($data['sutradara']);

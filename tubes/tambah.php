@@ -4,7 +4,7 @@ require 'functions.php';
 
 //cek apakah tombol submit sudah ditekan / belum
 if ( isset($_POST['submit']) ){
-    
+
 
     //cek apakah data berhasil di tambahkan atau tidak
     
@@ -40,7 +40,7 @@ if ( isset($_POST['submit']) ){
 <body>
     <h1>Tambah Data Film</h1>
 
-    <form action="" method="POST">
+    <form action="" method="POST" enctype="multipart/form-data">
         <ul>
             <li>
                 <label for="judul_film">Judul Film</label>
@@ -48,7 +48,7 @@ if ( isset($_POST['submit']) ){
             </li>
             <li>
                 <label for="thumbnail">thumbnail</label>
-                <input type="text" name="thumbnail" id="thumbnail" required>
+                <input type="file" name="thumbnail" id="thumbnail">
             </li>
             <li>
                 <label for="genre">genre</label>

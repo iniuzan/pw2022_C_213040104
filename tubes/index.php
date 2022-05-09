@@ -1,4 +1,9 @@
 <?php 
+session_start();
+if (!isset($_SESSION['login'])){
+    header("Location: login.php");
+    exit;
+}
 require 'functions.php';
 $film = query("SELECT * FROM film ORDER BY id DESC");
 
@@ -65,6 +70,7 @@ if (isset($_POST['cari'])){
         <?php endforeach; ?>
 
     </table>
+    <a href="./logout.php">Logout!</a>
 </body>
 
 </html>

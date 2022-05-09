@@ -7,7 +7,7 @@ $conn = mysqli_connect('localhost','root','','tubes_pw2022_c_213040104');
 
 // if ( $conn == true ){
 //     echo "<h1>Connection Success!</h1>";
-// }else{
+// }else{ 
 //     echo "<h1>Connection Failed!</h1>";
 //     exit();
 // }
@@ -16,6 +16,7 @@ $conn = mysqli_connect('localhost','root','','tubes_pw2022_c_213040104');
 
 function query ($query){
     global $conn;
+    
     $result = mysqli_query($conn,$query);
     $rows = [];
     while ($row = mysqli_fetch_assoc($result)){
@@ -87,6 +88,7 @@ function upload(){
         </script>
         ";
         return false;
+
     }
 
     //lolos pengecekan, gambar ready to upload
@@ -156,6 +158,50 @@ function cari($keyword){
         penerbit LIKE '%$keyword%'
     ";
     return query($query);
+}
+
+function registrasi($data){
+    global $conn;
+
+    $username = strtolower(stripslashes($data['username']));
+    $password = mysqli_real_escape_string($conn,$data['password']);
+    $confirmation = mysqli_real_escape_string($conn,$data['confirmation']);
+
+
+    //cek username udah ada atau belum
+
+    $result = mysqli_query($conn, "SELECT username FROM user WHERE username = '$username'");
+    
+    if(mysqli_fetch_assoc($result)){
+        echo "
+        <script>
+        alert('Username sudah terdaftar!');
+        </script>
+        ";
+        return false;
+    }
+
+    //Konfirmasi password
+    if ($password !== $confirmation){
+        echo "
+        <script>
+        alert('Konfirmasi Password Tidak Sesuai');
+        </script>
+        ";
+        return false;
+    }
+
+
+    //password encrypting
+    $password = password_hash($password,PASSWORD_DEFAULT);
+
+
+
+    //jika password sama, tambahkan user ke DB
+    mysqli_query($conn,"INSERT INTO user VALUES ('', '$username', '$password')");
+
+    return mysqli_affected_rows($conn);
+
 }
 
 ?>

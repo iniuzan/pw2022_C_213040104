@@ -11,14 +11,14 @@ if( hapus($id) > 0 ){
     echo "
     <script>
     alert('DATA BERHASIL DIHAPUS!');
-    document.location.href = 'index.php'
+    document.location.href = 'admin.php'
     </script>
     ";
 } else{
     echo "
     <script>
     alert('DATA GAGAL DIHAPUS!');
-    document.location.href = 'index.php'
+    document.location.href = 'admin.php'
     </script>
     ";
 }

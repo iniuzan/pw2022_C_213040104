@@ -1,8 +1,8 @@
 <?php 
 
 $conn = mysqli_connect('localhost','root','','tubes_pw2022_c_213040104');
-
-// Cek Koneksi antara Website dengan database berhasil atau tidak.
+    
+// Cek Koneksi antara Website dengan database berhasil atau tidak
 
 
 // if ( $conn == true ){
@@ -29,6 +29,7 @@ function tambah($data){
     global $conn;
 
     $judul_film = htmlspecialchars($data['judul_film']);
+    $sinopsis = htmlspecialchars($data['sinopsis']);
     $genre = htmlspecialchars($data['genre']);
     $tahun_rilis = htmlspecialchars($data['tahun_rilis']);
     $sutradara = htmlspecialchars($data['sutradara']);
@@ -43,7 +44,7 @@ function tambah($data){
 
     $query = "INSERT INTO film
             VALUES
-            ('','$judul_film','$thumbnail','$genre','$tahun_rilis','$sutradara','$penerbit')";
+            ('','$judul_film','$sinopsis','$thumbnail','$genre','$tahun_rilis','$sutradara','$penerbit')";
 
     mysqli_query($conn,$query);
 
@@ -78,6 +79,7 @@ function upload(){
         alert('YANG ANDA UPLOAD BUKAN GAMBAR!');
         </script>
         ";
+        return false;
     }
 
     //cek ukuran gambar
@@ -112,6 +114,11 @@ function hapus($id){
     
 }
 
+function detail($data){
+    global $conn;
+    $id = $data['id'];
+}
+
 function ubah($data){
     global $conn;
 
@@ -126,6 +133,7 @@ function ubah($data){
         $thumbnail = upload();
     }
     
+    $sinopsis = htmlspecialchars($data['sinopsis']);
     $genre = htmlspecialchars($data['genre']);
     $tahun_rilis = htmlspecialchars($data['tahun_rilis']);
     $sutradara = htmlspecialchars($data['sutradara']);
@@ -136,6 +144,7 @@ function ubah($data){
 
     $query = "UPDATE film SET 
                 judul_film = '$judul_film',
+                sinopsis = '$sinopsis',
                 thumbnail = '$thumbnail',
                 genre = '$genre',
                 tahun_rilis = '$tahun_rilis',
@@ -147,7 +156,6 @@ function ubah($data){
     mysqli_query($conn,$query);
     return mysqli_affected_rows($conn);
 }
-
 function cari($keyword){
     $query = "SELECT * FROM film
         WHERE
@@ -164,8 +172,8 @@ function registrasi($data){
     global $conn;
 
     $username = strtolower(stripslashes($data['username']));
-    $password = mysqli_real_escape_string($conn,$data['password']);
-    $confirmation = mysqli_real_escape_string($conn,$data['confirmation']);
+    $password = mysqli_real_escape_string($conn, $data['password']);
+    $confirmation = mysqli_real_escape_string($conn, $data['confirmation']);
 
 
     //cek username udah ada atau belum
@@ -174,9 +182,9 @@ function registrasi($data){
     
     if(mysqli_fetch_assoc($result)){
         echo "
-        <script>
-        alert('Username sudah terdaftar!');
-        </script>
+            <script>
+                alert('Username sudah terdaftar!');
+            </script>
         ";
         return false;
     }
@@ -184,9 +192,9 @@ function registrasi($data){
     //Konfirmasi password
     if ($password !== $confirmation){
         echo "
-        <script>
-        alert('Konfirmasi Password Tidak Sesuai');
-        </script>
+            <script>
+                alert('Konfirmasi Password Tidak Sesuai');
+            </script>
         ";
         return false;
     }
@@ -194,7 +202,7 @@ function registrasi($data){
 
     //password encrypting
     $password = password_hash($password,PASSWORD_DEFAULT);
-
+    
 
 
     //jika password sama, tambahkan user ke DB

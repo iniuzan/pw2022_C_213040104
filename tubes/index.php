@@ -68,29 +68,33 @@ $f = query("SELECT * FROM film");
                 </div>
             </div>
             <?php foreach ($f as $fi) :?>
-            <div class="row justify-content-center">
-                <div class="col-md-3 mb-3">
-                    <div class="card">
-                        <img src="assets/img/<?= $fi['thumbnail'] ?>" class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <p class="card-text text-center lead"><?= $fi['judul_film'] ?></p>
-                            <p class="card-text text-center">
-                            </p>
-                        </div>
-                        <div class="card-footer">
-                            <div class="text-center">
-                                <a href="userdetail.php?id=<?=$fi['id']?>" class="btn btn-info center">Detail Film</a>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-3 mb-4">
+                        <div class="card">
+                            <img src="assets/img/<?= $fi['thumbnail'] ?>" class="card-img-top" alt="..." />
+                            <div class="card-body">
+                                <p class="card-text text-center lead"><?= $fi['judul_film'] ?></p>
+                                <p class="card-text text-center">
+                                </p>
                             </div>
+                            <div class="card-footer">
+                                <div class="text-center">
+                                    <a href="userdetail.php?id=<?=$fi['id']?>" class="btn btn-info center">Detail
+                                        Film</a>
+                                </div>
 
+                            </div>
                         </div>
                     </div>
+                    <?php endforeach; ?>
+
+
+
+
                 </div>
-                <?php endforeach; ?>
-
-
-
-
             </div>
+
         </div>
         <svg xmlns=" http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
             <path fill="#ffffff" fill-opacity="10"

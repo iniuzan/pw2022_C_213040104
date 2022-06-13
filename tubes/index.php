@@ -52,14 +52,14 @@ $f = query("SELECT * FROM film");
                     </li>
                 </ul>
                 <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-info " type="submit">Search</button>
+                    <input class="form-control me-2" type="text" placeholder="Cari Film" aria-label="Search"
+                        id="keyword" name="keyword">
+                    <button class="btn btn-outline-info " type="submit" name="cari" id="tombol-cari">Search</button>
                 </form>
             </div>
         </div>
     </nav>
 
-    <?php foreach ($f as $fi) ?>
     <section id="Film">
         <div class="container">
             <div class="row text-center">
@@ -67,32 +67,32 @@ $f = query("SELECT * FROM film");
                     <h2>Our Film</h2>
                 </div>
             </div>
+            <?php foreach ($f as $fi) :?>
             <div class="row justify-content-center">
                 <div class="col-md-3 mb-3">
                     <div class="card">
                         <img src="assets/img/<?= $fi['thumbnail'] ?>" class="card-img-top" alt="..." />
                         <div class="card-body">
                             <p class="card-text text-center lead"><?= $fi['judul_film'] ?></p>
-                            <p class="card-text text-center">We can help u to solve any Network Problems.</p>
+                            <p class="card-text text-center">
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <div class="text-center">
+                                <a href="userdetail.php?id=<?=$fi['id']?>" class="btn btn-info center">Detail Film</a>
+                            </div>
+
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3 mb-3">
-                    <div class="card">
-                        <img src="assets/img/<?= $fi['thumbnail'] ?>" class="card-img-top" alt="..." />
-                        <div class="card-body">
-                            <p class="card-text text-center lead"><?= $fi['judul_film'] ?></p>
-                            <p class="card-text text-center">We can help u to solve any Network Problems.</p>
-                        </div>
-                    </div>
-                </div>
+                <?php endforeach; ?>
 
 
 
 
             </div>
         </div>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+        <svg xmlns=" http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
             <path fill="#ffffff" fill-opacity="10"
                 d="M0,192L60,165.3C120,139,240,85,360,106.7C480,128,600,224,720,229.3C840,235,960,149,1080,122.7C1200,96,1320,128,1380,144L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z">
             </path>

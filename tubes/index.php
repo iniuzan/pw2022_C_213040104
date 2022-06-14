@@ -67,12 +67,14 @@ $f = query("SELECT * FROM film");
                     <h2>Our Film</h2>
                 </div>
             </div>
-            <?php foreach ($f as $fi) :?>
             <div class="container">
                 <div class="row justify-content-center">
+                    <?php foreach ($f as $fi) :?>
+
                     <div class="col-md-3 mb-4">
                         <div class="card">
-                            <img src="assets/img/<?= $fi['thumbnail'] ?>" class="card-img-top" alt="..." />
+                            <img src="assets/img/<?= $fi['thumbnail'] ?>" class="card-img-top" alt="..."
+                                height="400px" />
                             <div class="card-body">
                                 <p class="card-text text-center lead"><?= $fi['judul_film'] ?></p>
                                 <p class="card-text text-center">
